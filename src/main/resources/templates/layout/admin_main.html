@@ -1,0 +1,12 @@
+<html xmlns:th = "http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+<head>
+    <div th:insert="~{layout/head}"></div>
+</head>
+<body style="margin: 0; padding: 0;">
+
+<div class="container-fluid" style="padding-right:0; padding-left: 0; " th:insert="~{layout/admin_navbar}"></div>
+
+
+<div class="container" layout:fragment = "admin_site_content"></div>
+</body>
+</html>

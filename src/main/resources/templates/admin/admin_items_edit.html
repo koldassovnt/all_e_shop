@@ -1,0 +1,136 @@
+<html xmlns:th = "http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator = "layout/admin_main.html">
+
+<div layout:fragment = "admin_site_content">
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h1 class="my-4"></h1>
+                <div class="list-group">
+                    <a href="#" style="background-color: #343A40;" class="list-group-item active" th:text="#{label.dashboard}"></a>
+                    <a th:href="@{/admin_users}" class="list-group-item" >Users</a>
+                    <a th:href="@{/admin_roles}" class="list-group-item" >Roles</a>
+                    <a th:href="@{/admin_items}" class="list-group-item" th:text="#{list-group.title_items}"></a>
+                    <a th:href="@{/admin_countries}" class="list-group-item" th:text="#{list-group.title_countries}"></a>
+                    <a th:href="@{/admin_brands}" class="list-group-item" th:text="#{list-group.title_brand}"></a>
+                    <a th:href="@{/admin}" class="list-group-item" th:text="#{list-group.title_cat}"></a>
+                </div>
+
+
+            </div>
+            <!-- /.col-lg-3 -->
+
+
+            <div class="col-lg-9">
+                <div class="my-4" style="display: flex; justify-content: space-between">
+                    <h1 style="margin:0;" th:text="${shopItem.name}"></h1>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-6 offset-3">
+                        <form th:action="@{'/edit_item'}" method="post">
+                            <input type="hidden" th:value="${shopItem.id}" name="item_id">
+                            <div class="form-group">
+                                <label th:text="#{label.name}"></label>
+                                <input type="text" class="form-control" name="name" th:value="${shopItem.name}">
+                            </div>
+                            <div class="form-group">
+                                <label th:text="#{label.description}"></label>
+                                <input type="text" class="form-control" name="description" th:value="${shopItem.description}">
+
+                            </div>
+                            <div class="form-group">
+                                <label th:text="#{label.price}"></label>
+                                <input type="number" class="form-control" name="price" th:value="${shopItem.price}">
+                            </div>
+
+                            <div class="form-group">
+                                <label th:text="#{label.brand}"></label>
+                                <select name="brand_id" class="form-control">
+                                    <option th:selected="${shopItem.brand.name}" th:value="${shopItem.brand.id}" th:text="${shopItem.brand.name}"></option>
+                                    <option th:each="b : ${brands}" th:text="${b.name}" th:value="${b.id}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label th:text="#{label.rating}"></label>
+                                <input type="text" class="form-control" name="stars" th:value="${shopItem.stars}" >
+
+                            </div>
+                            <div class="form-group">
+                                <label th:text="#{label.sml_picture_url}"></label>
+                                <input type="text" class="form-control" name="small_pictureURL" th:value="${shopItem.smallPicURL}" >
+
+                            </div>
+                            <div class="form-group">
+                                <label th:text="#{label.large_picture_url}"></label>
+                                <input type="text" class="form-control" name="large_pictureURL" th:value="${shopItem.largePicURL}">
+
+                            </div>
+                            <div class="form-group">
+                                <label th:text="#{label.in_top}"></label>
+                                <select name="to_top" class="form-control">
+                                    <option selected th:value="YES">YES</option>
+                                    <option th:value="NO">NO</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div class="form-group">
+                                <button class="btn btn-success">SAVE</button>
+                            </div>
+                        </form>
+                        <div>
+                            <form th:action="@{'/delete_item'}" method="post">
+                                <input name="item_id" type="hidden" th:value="${shopItem.id}">
+                                <button class="btn btn-danger">DELETE</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-6 offset-3">
+                        <h3 style="margin-bottom: 4px;" th:text="#{list-group.title_cat}"></h3>
+                        <table class="table table-striped">
+                            <tbody>
+                            <tr th:each="cat : ${unsigned_categories}">
+                                <form th:action="@{'/assign_category'}" method="post">
+                                    <input type="hidden" th:value="${cat.id}" name="cat_id">
+                                    <input type="hidden" th:value="${shopItem.id}" name="item_id">
+                                    <td th:text="${cat.name}"></td>
+                                    <td width="10%">
+                                        <button class="btn btn-success btn-sm">+</button>
+                                    </td>
+                                </form>
+                            </tr>
+                            <tr th:each="it_cat : ${item_categories}">
+                                <form th:action="@{'/unassign_category'}" method="post">
+                                    <input type="hidden" th:value="${it_cat.id}" name="cat_id">
+                                    <input type="hidden" th:value="${shopItem.id}" name="item_id">
+                                    <td th:text="${it_cat.name}"></td>
+                                    <td width="10%">
+                                        <button class="btn btn-danger btn-sm">-</button>
+                                    </td>
+                                </form>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-lg-9 -->
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+
+</div>
+</html>

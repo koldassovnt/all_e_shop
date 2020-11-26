@@ -1,0 +1,89 @@
+<html xmlns:th = "http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator = "layout/main.html">
+
+<div layout:fragment = "site_content">
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h1 class="my-4"></h1>
+                <div class="list-group">
+                    <a href="#" style="background-color: #156145;" class="list-group-item active" th:text="#{list-group.title_cat}"></a>
+                    <div th:each = "it : ${categories}">
+                        <a href="#" class="list-group-item" th:text="${it.name}"></a>
+                    </div>
+                </div>
+
+                <h1 class="my-4"></h1>
+                <div class="list-group">
+                    <a href="#" style="background-color: #156145;" class="list-group-item active" th:text="#{list-group.title_brand}"></a>
+                    <div th:each = "it : ${brands}">
+                        <a th:href="@{'/search_by_brand_out/' + ${it.id}}" class="list-group-item" th:text="${it.name}"></a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+
+                <div class="row" >
+
+                    <div class="login-form">
+                        <div class="alert alert-primary" role="alert" th:text="${successfullprofile}" th:if="${successfullprofile}"></div>
+                        <form th:action="@{'/update_profile'}" method="post">
+                            <input type="hidden" name="user_id" th:value="${currentUser.id}">
+                            <div class="form-group">
+                                <input name="user_email" th:value="${currentUser.email}" type="email" class="form-control" th:placeholder="${currentUser.email}" required>
+                            </div>
+                            <div class="form-group">
+                                <input name="user_name" th:value="${currentUser.fullName}" type="text" class="form-control" th:placeholder="${currentUser.fullName}" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" style="background-color: #156145; color: white;" class="btn btn-block" th:text="#{label.update_profile}"></button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="login-form">
+                        <div class="alert alert-danger" role="alert" th:text="${oldpassworderror}" th:if="${oldpassworderror}"></div>
+                        <div class="alert alert-danger" role="alert" th:text="${passwordsnotequal}" th:if="${passwordsnotequal}"></div>
+                        <div class="alert alert-primary" role="alert" th:text="${successfull}" th:if="${successfull}"></div>
+                        <form th:action="@{'/update_password'}" method="post">
+                            <input type="hidden" name="user_id" th:value="${currentUser.id}">
+                            <div class="form-group">
+                                <input name="user_old_password" type="password" class="form-control" th:placeholder="#{label.old_password}" required>
+                            </div>
+                            <div class="form-group">
+                                <input name="user_new_password" type="password" class="form-control" th:placeholder="#{label.new_password}" required>
+                            </div>
+                            <div class="form-group">
+                                <input name="user_renew_password" type="password" class="form-control" th:placeholder="#{label.renew_password}" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" style="background-color: #156145; color: white;" class="btn btn-block" th:text="#{label.update_password}"></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.col-lg-9 -->
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+
+</div>
+
+</html>

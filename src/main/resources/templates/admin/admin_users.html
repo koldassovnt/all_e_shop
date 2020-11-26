@@ -1,0 +1,109 @@
+<html xmlns:th = "http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator = "layout/admin_main.html">
+
+<div layout:fragment = "admin_site_content">
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h1 class="my-4"></h1>
+                <div class="list-group">
+                    <a href="#" style="background-color: #343A40;" class="list-group-item active" th:text="#{label.dashboard}"></a>
+                    <a th:href="@{/admin_users}" class="list-group-item" >Users</a>
+                    <a th:href="@{/admin_roles}" class="list-group-item" >Roles</a>
+                    <a th:href="@{/admin_items}" class="list-group-item" th:text="#{list-group.title_items}"></a>
+                    <a th:href="@{/admin_countries}" class="list-group-item" th:text="#{list-group.title_countries}"></a>
+                    <a th:href="@{/admin_brands}" class="list-group-item" th:text="#{list-group.title_brand}"></a>
+                    <a th:href="@{/admin}" class="list-group-item" th:text="#{list-group.title_cat}"></a>
+                </div>
+
+
+            </div>
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+                <div class="my-4" style="display: flex; justify-content: space-between">
+                    <h1 style="margin:0;" th:text="#{list-group.title_cat}"></h1>
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#addModal">Add New</button>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>EMAIL</th>
+                                <th>FULL NAME</th>
+                                <th>ROLES</th>
+                                <th>OPERATIONS</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each = "it : ${users}">
+                                <td th:text = "${it.id}"></td>
+                                <td th:text = "${it.email}"></td>
+                                <td th:text="${it.fullName}"></td>
+                                <td th:text="${it.printRoles()}"></td>
+                                <td><a th:href="@{'/admin_users_edit/' + ${it.id}}" class="btn btn-info btn-sm">Details</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.col-lg-9 -->
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Brand</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form th:action="@{'/add_user'}" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input name="user_email" type="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input name="user_password" type="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <input name="user_name" type="text" class="form-control" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <select name="role_id" class="form-control">
+                                <option th:each="r : ${roles}" th:text="${r.name}" th:value="${r.id}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" style="background-color: #156145; color: white;" class="btn">ADD</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</html>

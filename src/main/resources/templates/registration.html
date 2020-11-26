@@ -1,0 +1,62 @@
+<html xmlns:th = "http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator = "layout/main.html">
+
+<div layout:fragment = "site_content">
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h1 class="my-4"></h1>
+                <div class="list-group">
+                    <a href="#" style="background-color: #156145;" class="list-group-item active" th:text="#{list-group.title_cat}"></a>
+                    <div th:each = "it : ${categories}">
+                        <a href="#" class="list-group-item" th:text="${it.name}"></a>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+
+                <div class="row" >
+                    <div class="login-form">
+                        <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                        <form th:action="@{'/registration'}" method="post">
+                            <h2 class="text-center" th:text="#{label.registration}"></h2>
+                            <div class="form-group">
+                                <input name="user_email" type="email" class="form-control" th:placeholder="#{label.email}" required>
+                            </div>
+                            <div class="form-group">
+                                <input name="user_password" type="password" class="form-control" th:placeholder="#{label.password}" required>
+                            </div>
+                            <div class="form-group">
+                                <input name="user_re_password" type="password" class="form-control" th:placeholder="#{label.re_password}" required>
+                            </div>
+                            <div class="form-group">
+                                <input name="user_name" type="text" class="form-control" th:placeholder="#{label.full_name}" required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" style="background-color: #156145; color: white;" class="btn btn-block" th:text="#{label.sign_up}"></button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.col-lg-9 -->
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+
+</div>
+
+</html>

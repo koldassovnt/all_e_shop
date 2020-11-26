@@ -1,0 +1,13 @@
+<html xmlns:th = "http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <div th:insert="~{layout/head}"></div>
+</head>
+<body style="margin: 0; padding: 0;">
+
+    <div class="container-fluid" style="padding-right:0; padding-left: 0; " th:insert="~{layout/navbar}"></div>
+
+    <div class="container" layout:fragment = "site_content"></div>
+</body>
+</html>

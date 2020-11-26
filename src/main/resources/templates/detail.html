@@ -1,0 +1,73 @@
+<html xmlns:th = "http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator = "layout/main.html">
+
+<div layout:fragment = "site_content">
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h1 class="my-4"></h1>
+
+                <h1 class="my-4"></h1>
+                <div class="list-group">
+                    <a href="#" style="background-color: #156145;" class="list-group-item active" th:text="#{list-group.title_brand}"></a>
+                    <div th:each = "it : ${brands}">
+                        <a th:href="@{'/search_by_brand_out/' + ${it.id}}" class="list-group-item" th:text="${it.name}"></a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+
+                <div class="mt-4">
+                    <form th:action="@{'/searchItem'}" method="get" style="display: flex;">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" th:placeholder="#{input.search}">
+                        </div>
+                        <button type="submit" class="btn btn-dark ml-2" style="background-color: #156145" th:text="#{btn.search}"></button>
+                    </form>
+                </div>
+
+                <div class="row" >
+                    <div class="mt-4">
+                        <div class="card h-100">
+                            <a href="#" ><img class="card-img-top" th:src="${item.largePicURL}" alt=""></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a href="#" th:text="${item.name}"></a>
+                                </h4>
+                                <h5 th:text="${item.priceToStr()}"></h5>
+                                <p class="card-text" th:text="${item.description}"></p>
+                                <br>
+                                <p> <b th:text="#{label.brand}"></b>
+                                    <a href="#" th:text="${item.brand.name}"></a>,
+                                    <a href="#" th:text="${item.brand.country.name}"></a>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.col-lg-9 -->
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+
+</div>
+
+</html>

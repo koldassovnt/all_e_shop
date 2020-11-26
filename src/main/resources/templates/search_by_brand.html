@@ -1,0 +1,105 @@
+<html xmlns:th = "http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator = "layout/main.html">
+
+<div layout:fragment = "site_content">
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h1 class="my-4"></h1>
+
+
+                <h1 class="my-4"></h1>
+                <div class="list-group">
+                    <a href="#" style="background-color: #156145;" class="list-group-item active" th:text="#{list-group.title_brand}"></a>
+                    <div th:each = "it : ${brands}">
+                        <a th:href="@{'/search_by_brand_out/' + ${it.id}}" class="list-group-item" th:text="${it.name}"></a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+
+                <div class="mt-4">
+                    <form th:action="@{'/search_by_brand_in/'}" method="get" style="display: flex; justify-content: space-between">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" th:value="${searched_name}">
+                        </div>
+                        <div class="input-group ml-2">
+                            <select name="brand_id" class="form-control" >
+                                <option th:selected="${brand.name}" th:value="${brand.id}" th:text="${brand.name}"></option>
+                                <option th:each="b : ${brands}" th:s th:text="${b.name}" th:value="${b.id}"
+                                        >
+
+                                </option>
+                            </select>
+                        </div>
+                        <div class="input-group ml-2">
+                            <input type="text" class="form-control" name="priceFrom" th:placeholder="#{input.price_from}">
+                        </div>
+                        <div class="input-group ml-2">
+                            <input type="text" class="form-control" name="priceTo" th:placeholder="#{input.price_to}">
+                        </div>
+                        <button type="submit" class="btn btn-dark ml-2" style="background-color: #156145" th:text="#{btn.search}"></button>
+                    </form>
+                </div>
+
+                <div class="mt-4" style="display: flex; justify-content: flex-end">
+                    <div><p th:text="#{label.order_by}"></p></div>
+                    <form th:action="@{'/ascending_by_brand_search'}" method="get" style="margin-left: 4px;">
+                        <input type="hidden" name="brand_id" th:value="${brand.id}">
+                        <button type="submit" class="btn btn-secondary" th:text="#{btn.asc}"></button>
+                    </form>
+                    <form th:action="@{'/descending_by_brand_search'}" method="get" style="margin-left: 4px;">
+                        <input type="hidden" name="brand_id" th:value="${brand.id}">
+                        <button type="submit" class="btn btn-dark" th:text="#{btn.desc}"></button>
+                    </form>
+                </div>
+
+                <div>
+                    <h2 th:text="#{label.search_res}"></h2>
+                </div>
+
+                <div class="row" >
+                    <div class="col-lg-4 col-md-6 mb-4" th:each = "it : ${items}">
+                        <div class="card h-100">
+                            <a th:href="@{'/detail/' + ${it.id}}"><img class="card-img-top" th:src="${it.smallPicURL}" alt=""></a>
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <a th:href="@{'/detail/' + ${it.id}}"th:text="${it.name}"></a>
+                                </h4>
+                                <h5 th:text="${it.priceToStr()}"></h5>
+                                <p class="card-text" th:text="${it.description}"></p>
+                                <br>
+                                <p> <b th:text="#{label.brand}"></b>
+                                    <a href="#" th:text="${it.brand.name}"></a>,
+                                    <a href="#" th:text="${it.brand.country.name}"></a>
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.col-lg-9 -->
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+
+</div>
+
+</html>
