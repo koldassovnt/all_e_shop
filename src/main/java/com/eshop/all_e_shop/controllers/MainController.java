@@ -69,7 +69,14 @@ public class MainController {
     public String detail(Model model, @PathVariable(name = "id") Long id){
         ShopItem shopItem = shopItemService.getItem(id);
         List<Brand> brands = shopItemService.getAllBrands();
-
+        List<Pictures> pictures = shopItemService.getAllPictures();
+        List<Pictures> item_pictures = new ArrayList<>();
+        for (Pictures p: pictures) {
+            if (p.getShopItem().getId().equals(shopItem.getId())){
+                item_pictures.add(p);
+            }
+        }
+        model.addAttribute("item_pictures", item_pictures);
         model.addAttribute("brands", brands);
         model.addAttribute("item", shopItem);
         model.addAttribute("currentUser", getUserData());

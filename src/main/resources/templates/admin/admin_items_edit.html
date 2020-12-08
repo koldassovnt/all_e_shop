@@ -122,6 +122,48 @@
                         </table>
                     </div>
                 </div>
+
+                <div class="row-mt-5">
+                    <div class="col-6 offset-3">
+                        <h3 style="margin-bottom: 4px;">Pictures:</h3>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Picture</th>
+                                <th>URL</th>
+                                <th>ADDED DATE</th>
+                                <th>OPERATIONS</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td width="10%">
+                                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addModal">+</button>
+                                    </td>
+                            </tr>
+                            <tr th:each="it_pic : ${item_pictures}">
+                                <form th:action="@{'/unassign_picture'}" method="post">
+                                    <input type="hidden" th:value="${it_pic.id}" name="pic_id">
+                                    <input type="hidden" th:value="${shopItem.id}" name="item_id">
+                                    <td>
+                                        <img style="vertical-align: bottom; width:100%; height:auto;" th:src="@{'/viewItemImg/' + ${it_pic.url}}" alt="Item_img">
+                                    </td>
+                                    <td th:text="${it_pic.url}"></td>
+                                    <td th:text="${it_pic.date}"></td>
+                                    <td width="10%">
+                                        <button class="btn btn-danger btn-sm">-</button>
+                                    </td>
+                                </form>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
             <!-- /.col-lg-9 -->
 
@@ -130,6 +172,36 @@
 
     </div>
     <!-- /.container -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Picture</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form th:action="@{'/add_item_picture'}" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <input type="hidden" th:value="${shopItem.id}" name="item_id">
+                            <div class="custom-file">
+                                <input name="image" type="file" class="custom-file-input" id="inputGroupFile01"
+                                       aria-describedby="inputGroupFileAddon01">
+                                <label class="custom-file-label" for="inputGroupFile01" th:text="#{button.chooseFile}"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">ADD</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
 
 </div>
