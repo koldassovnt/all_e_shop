@@ -30,6 +30,34 @@
 
             <div class="col-lg-9">
 
+                <div class = "row">
+                    <div class="login-form">
+                        <div class="card">
+                            <div class="alert alert-primary" role="alert" th:text="${successfull}" th:if="${successfull}"></div>
+                            <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+                            <img class="card-img-top" th:src="@{'/viewphoto/' + ${currentUser.getPictureUrl()}}" alt="Card image cap">
+                            <div class="card-body">
+                                <form th:action="@{'/upload_avatar'}" method="post" enctype="multipart/form-data">
+
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input name="avatar" type="file" class="custom-file-input" id="inputGroupFile01"
+                                                   aria-describedby="inputGroupFileAddon01">
+                                            <label class="custom-file-label" for="inputGroupFile01" th:text="#{button.chooseFile}"></label>
+                                        </div>
+                                    </div>
+
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="formFile" class="form-label" th:text="#{button.chooseFile}"></label>-->
+<!--                                        <input name="avatar" type="file" class="form-control" id="formFile">-->
+<!--                                    </div>-->
+                                    <button class="btn mt-2" style="background-color: #156145; color: white" th:text="#{button.uploadFile}"></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row" >
 
                     <div class="login-form">

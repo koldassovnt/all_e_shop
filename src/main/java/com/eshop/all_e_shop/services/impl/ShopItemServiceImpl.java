@@ -1,13 +1,7 @@
 package com.eshop.all_e_shop.services.impl;
 
-import com.eshop.all_e_shop.enteties.Brand;
-import com.eshop.all_e_shop.enteties.Categories;
-import com.eshop.all_e_shop.enteties.Country;
-import com.eshop.all_e_shop.enteties.ShopItem;
-import com.eshop.all_e_shop.repositories.BrandRepository;
-import com.eshop.all_e_shop.repositories.CategoriesRepository;
-import com.eshop.all_e_shop.repositories.CountryRepository;
-import com.eshop.all_e_shop.repositories.ShopItemRepository;
+import com.eshop.all_e_shop.enteties.*;
+import com.eshop.all_e_shop.repositories.*;
 import com.eshop.all_e_shop.services.ShopItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +22,9 @@ public class ShopItemServiceImpl implements ShopItemService {
 
     @Autowired
     CategoriesRepository categoriesRepository;
+
+    @Autowired
+    PictureRepository pictureRepository;
 
     @Override
     public ShopItem addItem(ShopItem shopItem) {
@@ -172,6 +169,31 @@ public class ShopItemServiceImpl implements ShopItemService {
     @Override
     public void deleteCategory(Categories categories) {
         categoriesRepository.delete(categories);
+    }
+
+    @Override
+    public List<Pictures> getAllPictures() {
+        return pictureRepository.findAll();
+    }
+
+    @Override
+    public Pictures addPicture(Pictures pictures) {
+        return pictureRepository.save(pictures);
+    }
+
+    @Override
+    public Pictures savePicture(Pictures pictures) {
+        return pictureRepository.save(pictures);
+    }
+
+    @Override
+    public Pictures getPicture(Long id) {
+        return pictureRepository.getOne(id);
+    }
+
+    @Override
+    public void deletePicture(Pictures pictures) {
+        pictureRepository.delete(pictures);
     }
 
 

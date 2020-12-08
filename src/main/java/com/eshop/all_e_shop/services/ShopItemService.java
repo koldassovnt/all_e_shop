@@ -1,9 +1,6 @@
 package com.eshop.all_e_shop.services;
 
-import com.eshop.all_e_shop.enteties.Brand;
-import com.eshop.all_e_shop.enteties.Categories;
-import com.eshop.all_e_shop.enteties.Country;
-import com.eshop.all_e_shop.enteties.ShopItem;
+import com.eshop.all_e_shop.enteties.*;
 
 import java.util.List;
 
@@ -41,4 +38,10 @@ public interface ShopItemService {
     Categories saveCategory(Categories categories);
     Categories getCategory(Long id);
     void deleteCategory(Categories categories);
+
+    List<Pictures> getAllPictures();
+    Pictures addPicture(Pictures pictures);
+    Pictures savePicture(Pictures pictures);
+    Pictures getPicture(Long id);
+    void deletePicture(Pictures pictures);
 }

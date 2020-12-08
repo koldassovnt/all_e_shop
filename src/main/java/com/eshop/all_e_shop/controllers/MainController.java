@@ -3,7 +3,12 @@ package com.eshop.all_e_shop.controllers;
 import com.eshop.all_e_shop.enteties.*;
 import com.eshop.all_e_shop.services.ShopItemService;
 import com.eshop.all_e_shop.services.UserService;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,17 +17,29 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class MainController {
+
+    @Value("${file.avatar.viewPath}")
+    private String viewPath;
+
+    @Value("${file.avatar.uploadPath}")
+    private String uploadPath;
+
+    @Value("${file.avatar.defaultPicture}")
+    private String defaultPicture;
 
     @Autowired
     ShopItemService shopItemService;
@@ -289,6 +306,7 @@ public class MainController {
             users.setEmail(user_email);
             users.setPassword(passwordEncoder.encode(user_password));
             users.setFullName(user_name);
+            users.setPictureUrl("default-avatar.jpg");
             Role role = userService.getRoleByRoleName("ROLE_USER");
             ArrayList<Role> roles = new ArrayList<>();
             roles.add(role);
@@ -300,6 +318,58 @@ public class MainController {
             redirAttrs.addFlashAttribute("error", "Passwords are not equal");
             return "redirect:/registration";
         }
+    }
+
+    @PostMapping(value = "/upload_avatar")
+    @PreAuthorize("isAuthenticated()")
+    public String upload_avatar(@RequestParam(name = "avatar")MultipartFile file,
+                                RedirectAttributes redirAttrs) {
+
+        if (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png")) {
+            try {
+                Users currentUser = getUserData();
+
+                String picName = DigestUtils.sha1Hex("avatar_" + currentUser.getId() + "Picture!");
+
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(uploadPath + picName + ".jpg");
+                Files.write(path, bytes);
+
+                currentUser.setPictureUrl(picName);
+                userService.saveUser(currentUser);
+
+                redirAttrs.addFlashAttribute("successfull", "Image successfully uploaded!");
+                return "redirect:/profile";
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        redirAttrs.addFlashAttribute("error", "File format is not supported!");
+        return "redirect:/profile";
+    }
+
+    @GetMapping(value = "/viewphoto/{url}", produces = {MediaType.IMAGE_JPEG_VALUE})
+    @PreAuthorize("isAuthenticated()")
+    public @ResponseBody byte[] viewProfileImg(@PathVariable(name = "url") String url) throws IOException {
+
+        String picUrl = viewPath+defaultPicture;
+
+        if (url != null) {
+            picUrl = viewPath+url+".jpg";
+        }
+        InputStream in;
+
+        try {
+            ClassPathResource resource = new ClassPathResource(picUrl);
+            in = resource.getInputStream();
+        } catch (Exception e) {
+            ClassPathResource resource = new ClassPathResource(viewPath+defaultPicture);
+            in = resource.getInputStream();
+            e.printStackTrace();
+        }
+
+        return IOUtils.toByteArray(in);
     }
 
 
