@@ -58,6 +58,33 @@
                 </div>
                 <!-- /.row -->
 
+                <div class="mt-4">
+                    <h2 th:text="#{label.screenshots}"></h2>
+                </div>
+
+                <div class="row" >
+                    <div class="mt-4">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img th:if="${item_pictures != null && item_pictures.size() > 0}" style="vertical-align: bottom; width:100%; height:auto;" th:src="@{'/viewItemImg/' + ${item_pictures.get(0).url}}" class="d-block w-100" alt="item_img">
+                                </div>
+                                <div class="carousel-item" th:each="it_pic : ${item_pictures}">
+                                    <img style="vertical-align: bottom; width:100%; height:auto;" th:src="@{'/viewItemImg/' + ${it_pic.url}}" class="d-block w-100" alt="item_img">
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- /.col-lg-9 -->
 

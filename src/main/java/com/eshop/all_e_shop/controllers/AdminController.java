@@ -330,7 +330,6 @@ public class AdminController {
     }
 
     @GetMapping(value = "/viewItemImg/{url}", produces = {MediaType.IMAGE_JPEG_VALUE})
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
     public @ResponseBody byte[] viewItemImg(@PathVariable(name = "url") String url) throws IOException {
 
         String picUrl = viewPath+defaultPicture;

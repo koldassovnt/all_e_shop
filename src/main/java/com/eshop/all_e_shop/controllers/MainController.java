@@ -76,6 +76,7 @@ public class MainController {
                 item_pictures.add(p);
             }
         }
+
         model.addAttribute("item_pictures", item_pictures);
         model.addAttribute("brands", brands);
         model.addAttribute("item", shopItem);
