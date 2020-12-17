@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShopItem {
+public class ShopItem implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id")
@@ -31,6 +32,9 @@ public class ShopItem {
 
     @Column(name = "stars")
     private int stars;
+
+    @Column(name = "amount")
+    private int amount;
 
     @Column(name = "small_picurl")
     private String smallPicURL;

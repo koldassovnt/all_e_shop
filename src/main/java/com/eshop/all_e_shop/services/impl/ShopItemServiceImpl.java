@@ -3,6 +3,7 @@ package com.eshop.all_e_shop.services.impl;
 import com.eshop.all_e_shop.enteties.*;
 import com.eshop.all_e_shop.repositories.*;
 import com.eshop.all_e_shop.services.ShopItemService;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,12 @@ public class ShopItemServiceImpl implements ShopItemService {
 
     @Autowired
     PictureRepository pictureRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
 
     @Override
     public ShopItem addItem(ShopItem shopItem) {
@@ -194,6 +201,56 @@ public class ShopItemServiceImpl implements ShopItemService {
     @Override
     public void deletePicture(Pictures pictures) {
         pictureRepository.delete(pictures);
+    }
+
+    @Override
+    public List<Orders> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    @Override
+    public Orders addOrder(Orders orders) {
+        return orderRepository.save(orders);
+    }
+
+    @Override
+    public Orders saveOrder(Orders orders) {
+        return orderRepository.save(orders);
+    }
+
+    @Override
+    public Orders getOrder(Long id) {
+        return orderRepository.getOne(id);
+    }
+
+    @Override
+    public void deleteOrder(Orders orders) {
+        orderRepository.delete(orders);
+    }
+
+    @Override
+    public List<Comment> getAllComment() {
+        return commentRepository.findAll();
+    }
+
+    @Override
+    public Comment addComment(Comment comment) {
+        return commentRepository.save(comment);
+    }
+
+    @Override
+    public Comment saveComment(Comment comment) {
+        return commentRepository.save(comment);
+    }
+
+    @Override
+    public Comment getComment(Long id) {
+        return commentRepository.getOne(id);
+    }
+
+    @Override
+    public void deleteComment(Comment comment) {
+        commentRepository.delete(comment);
     }
 
 

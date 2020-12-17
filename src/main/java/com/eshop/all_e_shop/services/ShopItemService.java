@@ -1,6 +1,7 @@
 package com.eshop.all_e_shop.services;
 
 import com.eshop.all_e_shop.enteties.*;
+import org.aspectj.weaver.ast.Or;
 
 import java.util.List;
 
@@ -44,4 +45,16 @@ public interface ShopItemService {
     Pictures savePicture(Pictures pictures);
     Pictures getPicture(Long id);
     void deletePicture(Pictures pictures);
+
+    List<Orders> getAllOrders();
+    Orders addOrder(Orders orders);
+    Orders saveOrder(Orders orders);
+    Orders getOrder(Long id);
+    void deleteOrder(Orders orders);
+
+    List<Comment> getAllComment();
+    Comment addComment(Comment comment);
+    Comment saveComment(Comment comment);
+    Comment getComment(Long id);
+    void deleteComment(Comment comment);
 }

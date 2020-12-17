@@ -1,11 +1,12 @@
 package com.eshop.all_e_shop.repositories;
 
-import com.eshop.all_e_shop.enteties.Pictures;
+import com.eshop.all_e_shop.enteties.Orders;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional
-public interface PictureRepository extends JpaRepository<Pictures, Long> {
+public interface OrderRepository extends JpaRepository<Orders, Long> {
+
 }

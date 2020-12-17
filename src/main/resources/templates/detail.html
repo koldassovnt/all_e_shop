@@ -85,6 +85,13 @@
                     </div>
                 </div>
 
+                <div class="mt-4">
+                    <form th:action="@{'/add_item_to_basket'}" method="post">
+                        <input name="item_id" type="hidden" th:value="${item.id}">
+                        <button class="btn btn-success">Add to Basket</button>
+                    </form>
+                </div>
+
             </div>
             <!-- /.col-lg-9 -->
 
