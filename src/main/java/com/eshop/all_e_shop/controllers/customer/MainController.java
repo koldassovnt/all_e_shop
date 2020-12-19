@@ -1,4 +1,4 @@
-package com.eshop.all_e_shop.controllers;
+package com.eshop.all_e_shop.controllers.customer;
 
 import com.eshop.all_e_shop.enteties.*;
 import com.eshop.all_e_shop.services.ShopItemService;
