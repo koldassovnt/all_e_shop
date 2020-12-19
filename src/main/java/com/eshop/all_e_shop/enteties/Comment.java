@@ -13,7 +13,6 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id")
@@ -28,7 +27,7 @@ public class Comment {
     @ManyToOne(fetch = FetchType.EAGER)
     private ShopItem shopItem;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Users author;
 
 }

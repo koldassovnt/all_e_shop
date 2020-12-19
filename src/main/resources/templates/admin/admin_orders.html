@@ -1,0 +1,67 @@
+<html xmlns:th = "http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+      layout:decorator = "layout/admin_main.html">
+
+<div layout:fragment = "admin_site_content">
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h1 class="my-4"></h1>
+                <div class="list-group" th:insert="~{layout/admin_side_bar}"></div>
+
+
+            </div>
+            <!-- /.col-lg-3 -->
+
+
+            <div class="col-lg-9">
+                <div class="my-4" style="display: flex; justify-content: space-between">
+                    <h1 style="margin:0;">Orders</h1>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>SHOP ITEM</th>
+                                <th>AMOUNT</th>
+                                <th>TOTAL PRICE</th>
+                                <th>BUY DATE</th>
+                                <th>OPERATIONS</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each = "it : ${orders}">
+                                <td th:text = "${it.id}"></td>
+                                <td th:text = "${it.item.name}"></td>
+                                <td th:text="${it.amount}"></td>
+                                <td th:text="${it.total_price}"></td>
+                                <td th:text="${it.buy_date}"></td>
+                                <td>
+                                    <form th:action="@{'/delete_order'}" method="post">
+                                        <input type="hidden" name="order_id" th:value="${it.id}">
+                                        <button class="btn btn-danger btn-sm">DELETE</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.col-lg-9 -->
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+</div>
+</html>

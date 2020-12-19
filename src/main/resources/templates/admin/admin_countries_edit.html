@@ -20,20 +20,20 @@
 
             <div class="col-lg-9">
                 <div class="my-4" style="display: flex; justify-content: space-between">
-                    <h1 style="margin:0;" th:text="${role.name}"></h1>
+                    <h1 style="margin:0;" th:text="${country.name}"></h1>
                 </div>
 
                 <div class="row mt-5">
                     <div class="col-6 offset-3">
-                        <form th:action="@{'/edit_role'}" method="post">
-                            <input type="hidden" th:value="${role.id}" name="role_id">
+                        <form th:action="@{'/edit_country'}" method="post">
+                            <input type="hidden" th:value="${country.id}" name="country_id">
                             <div class="form-group">
                                 <label th:text="#{label.name}"></label>
-                                <input type="text" class="form-control" name="name" th:value="${role.name}">
+                                <input type="text" class="form-control" name="name" th:value="${country.name}">
                             </div>
                             <div class="form-group">
-                                <label>Description</label>
-                                <input type="text" class="form-control" name="description" th:value="${role.description}">
+                                <label>CODE</label>
+                                <input type="text" class="form-control" name="code" th:value="${country.code}">
                             </div>
                             <br>
                             <div class="form-group">
@@ -41,8 +41,8 @@
                             </div>
                         </form>
                         <div>
-                            <form th:action="@{'/delete_role'}" method="post">
-                                <input name="role_id" type="hidden" th:value="${role.id}">
+                            <form th:action="@{'/delete_country'}" method="post">
+                                <input name="country_id" type="hidden" th:value="${country.id}">
                                 <button class="btn btn-danger">DELETE</button>
                             </form>
                         </div>

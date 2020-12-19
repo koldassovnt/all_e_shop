@@ -3,7 +3,6 @@ package com.eshop.all_e_shop.services.impl;
 import com.eshop.all_e_shop.enteties.*;
 import com.eshop.all_e_shop.repositories.*;
 import com.eshop.all_e_shop.services.ShopItemService;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

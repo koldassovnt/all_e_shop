@@ -11,15 +11,7 @@
 
             <div class="col-lg-3">
                 <h1 class="my-4"></h1>
-                <div class="list-group">
-                    <a href="#" style="background-color: #343A40;" class="list-group-item active" th:text="#{label.dashboard}"></a>
-                    <a th:href="@{/admin_users}" class="list-group-item" >Users</a>
-                    <a th:href="@{/admin_roles}" class="list-group-item" >Roles</a>
-                    <a th:href="@{/admin_items}" class="list-group-item" th:text="#{list-group.title_items}"></a>
-                    <a th:href="@{/admin_countries}" class="list-group-item" th:text="#{list-group.title_countries}"></a>
-                    <a th:href="@{/admin_brands}" class="list-group-item" th:text="#{list-group.title_brand}"></a>
-                    <a th:href="@{/admin}" class="list-group-item" th:text="#{list-group.title_cat}"></a>
-                </div>
+                <div class="list-group" th:insert="~{layout/admin_side_bar}"></div>
 
 
             </div>
@@ -39,7 +31,7 @@
                                 <input name="user_email" th:value="${user.email}" type="email" class="form-control" th:placeholder="${user.email}" required>
                             </div>
                             <div class="form-group">
-                                <input name="user_password" th:value="${user.password}" type="password" class="form-control" th:placeholder="Update Password" required>
+                                <input name="user_password" th:value="${user.password}" type="password" class="form-control" th:placeholder="#{label.update_password}" required>
                             </div>
                             <div class="form-group">
                                 <input name="user_name" th:value="${user.fullName}" type="text" class="form-control" th:placeholder="${user.fullName}" required>

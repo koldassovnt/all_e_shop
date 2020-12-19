@@ -462,6 +462,58 @@ public class AdminController {
         return "admin/admin_countries";
     }
 
+    @GetMapping(value = "/admin_countries_edit/{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public String admin_countries_edit(Model model, @PathVariable(name = "id") Long id) {
+        Country country = shopItemService.getCountry(id);
+
+        model.addAttribute("country", country);
+        model.addAttribute("currentUser", getUserData());
+
+
+        return "admin/admin_countries_edit";
+    }
+
+    @PostMapping(value = "/add_country")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public String add_country(@RequestParam(name = "name") String name,
+                            @RequestParam(name = "code") String code) {
+
+        Country country = new Country();
+        country.setCode(code);
+        country.setName(name);
+
+        shopItemService.addCountry(country);
+
+        return "redirect:/admin_countries";
+    }
+
+    @PostMapping(value = "/edit_country")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public String edit_country(@RequestParam(name = "name") String name,
+                             @RequestParam(name = "code") String code,
+                             @RequestParam(name = "country_id") Long country_id) {
+
+        Country country = shopItemService.getCountry(country_id);
+        country.setName(name);
+        country.setCode(code);
+
+        shopItemService.saveCountry(country);
+
+        return "redirect:/admin_countries";
+    }
+
+    @PostMapping(value = "/delete_country")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public String delete_country(@RequestParam(name = "country_id") Long country_id){
+
+        Country country = shopItemService.getCountry(country_id);
+        shopItemService.deleteCountry(country);
+
+        return "redirect:/admin_countries";
+    }
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @GetMapping(value = "/admin_users")
@@ -643,7 +695,30 @@ public class AdminController {
         return "redirect:/admin_roles";
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    @GetMapping(value = "/admin_orders")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
+    public String admin_orders(Model model){
+        List<Orders> orders = shopItemService.getAllOrders();
+
+        model.addAttribute("orders", orders);
+        model.addAttribute("currentUser", getUserData());
+
+        return "admin/admin_orders";
+    }
+
+    @PostMapping(value = "/delete_order")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    public String delete_order(@RequestParam(name = "order_id") Long order_id){
+        Orders orders = shopItemService.getOrder(order_id);
+        shopItemService.deleteOrder(orders);
+
+        return "redirect:/admin_orders";
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     private Users getUserData() {

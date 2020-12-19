@@ -18,7 +18,7 @@ public class Orders {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private ShopItem item;
 
     @Column(name = "amount")

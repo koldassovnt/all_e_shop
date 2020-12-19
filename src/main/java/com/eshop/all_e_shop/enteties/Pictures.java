@@ -24,6 +24,6 @@ public class Pictures {
     @Column(name = "date")
     private Timestamp date;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private ShopItem shopItem;
 }
