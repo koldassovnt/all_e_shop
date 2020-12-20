@@ -1,6 +1,7 @@
 package com.eshop.all_e_shop.controllers.customer;
 
 import com.eshop.all_e_shop.enteties.Brand;
+import com.eshop.all_e_shop.enteties.Categories;
 import com.eshop.all_e_shop.enteties.ShopItem;
 import com.eshop.all_e_shop.enteties.Users;
 import com.eshop.all_e_shop.services.ShopItemService;
@@ -165,6 +166,20 @@ public class ItemSearchController {
         }
 
         brands.remove(idx);
+    }
+
+    @GetMapping(value = "/search_by_categories/{id}")
+    public String search_by_categories(Model model, @PathVariable(name = "id") Long id) {
+        Categories category = shopItemService.getCategory(id);
+        List<ShopItem> items = shopItemService.getItemsByCategories(category);
+        List<Brand> brands = shopItemService.getAllBrands();
+        List<Categories> categories = shopItemService.getAllCategories();
+
+        model.addAttribute("categories", categories);
+        model.addAttribute("items", items);
+        model.addAttribute("brands", brands);
+        model.addAttribute("currentUser", getUserData());
+        return "search_by_category";
     }
 
     private Users getUserData() {

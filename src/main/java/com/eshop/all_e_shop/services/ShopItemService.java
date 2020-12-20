@@ -21,6 +21,7 @@ public interface ShopItemService {
     List<ShopItem> getItemsByBrandIdAndNameAndPriceBetween(Long id, String name, double priceFrom, double priceTo);
     List<ShopItem> getItemsByBrandAsc(Long id);
     List<ShopItem> getItemsByBrandDesc(Long id);
+    List<ShopItem> getItemsByCategories(Categories categories);
 
     List<Country> getAllCountries();
     Country addCountry(Country country);
@@ -58,4 +59,5 @@ public interface ShopItemService {
     Comment getComment(Long id);
     void deleteComment(Comment comment);
     List<Comment> getCommentsByItemId(Long id);
+
 }

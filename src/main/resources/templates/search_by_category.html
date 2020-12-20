@@ -5,11 +5,17 @@
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
 
             <div class="col-lg-3">
                 <h1 class="my-4"></h1>
+                <div class="list-group">
+                    <a href="#" style="background-color: #156145;" class="list-group-item active" th:text="#{list-group.title_cat}"></a>
+                    <div th:each = "it : ${categories}">
+                        <a th:href="@{'/search_by_categories/' + ${it.id}}" class="list-group-item" th:text="${it.name}"></a>
+                    </div>
+                </div>
+
 
                 <h1 class="my-4"></h1>
                 <div class="list-group">
@@ -22,32 +28,15 @@
             </div>
             <!-- /.col-lg-3 -->
 
+
             <div class="col-lg-9">
 
                 <div class="mt-4">
-                    <form th:action="@{'/searchItemDetailed'}" method="get" style="display: flex; justify-content: space-between">
+                    <form th:action="@{'/searchItem'}" method="get" style="display: flex;">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="search" th:value="${searched_name}">
-                        </div>
-                        <div class="input-group ml-2">
-                            <input type="text" class="form-control" name="priceFrom" th:placeholder="#{input.price_from}">
-                        </div>
-                        <div class="input-group ml-2">
-                            <input type="text" class="form-control" name="priceTo" th:placeholder="#{input.price_to}">
+                            <input type="text" class="form-control" name="search" th:placeholder="#{input.search}">
                         </div>
                         <button type="submit" class="btn btn-dark ml-2" style="background-color: #156145" th:text="#{btn.search}"></button>
-                    </form>
-                </div>
-
-                <div class="mt-4" style="display: flex; justify-content: flex-end">
-                    <div><p th:text="#{label.order_by}"></p></div>
-                    <form th:action="@{'/ascending'}" method="get" style="margin-left: 4px;">
-                        <input type="hidden" name="search" th:value="${searched_name}">
-                        <button type="submit" class="btn btn-secondary" th:text="#{btn.asc}"></button>
-                    </form>
-                    <form th:action="@{'/descending'}" method="get" style="margin-left: 4px;">
-                        <input type="hidden" name="search" th:value="${searched_name}">
-                        <button type="submit" class="btn btn-dark" th:text="#{btn.desc}"></button>
                     </form>
                 </div>
 
@@ -99,11 +88,10 @@
 
         </div>
         <!-- /.row -->
-
     </div>
     <!-- /.container -->
 
 
-</div>
 
+</div>
 </html>

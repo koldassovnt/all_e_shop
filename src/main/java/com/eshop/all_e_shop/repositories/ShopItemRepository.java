@@ -1,5 +1,6 @@
 package com.eshop.all_e_shop.repositories;
 
+import com.eshop.all_e_shop.enteties.Categories;
 import com.eshop.all_e_shop.enteties.ShopItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -29,5 +30,6 @@ public interface ShopItemRepository extends JpaRepository<ShopItem, Long> {
 
     List<ShopItem> findAllByBrandIdOrderByPriceAsc(Long id);
 
+    List<ShopItem> findAllByCategories(Categories categories);
 
 }

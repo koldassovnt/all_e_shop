@@ -103,6 +103,11 @@ public class ShopItemServiceImpl implements ShopItemService {
     }
 
     @Override
+    public List<ShopItem> getItemsByCategories(Categories categories) {
+        return shopItemRepository.findAllByCategories(categories);
+    }
+
+    @Override
     public List<Country> getAllCountries() {
         return countryRepository.findAll();
     }

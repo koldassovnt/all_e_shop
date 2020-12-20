@@ -67,7 +67,12 @@ public class MainController {
         }
 
         List<Comment> comments = shopItemService.getCommentsByItemId(id);
+        List<String> roles = new ArrayList<>();
+        if (getUserData() != null)
+            roles = getUserRoles(getUserData());
 
+
+        model.addAttribute("roles", roles);
         model.addAttribute("comments", comments);
         model.addAttribute("item_pictures", item_pictures);
         model.addAttribute("brands", brands);
@@ -75,6 +80,16 @@ public class MainController {
         model.addAttribute("currentUser", getUserData());
 
         return "detail";
+    }
+
+    private List<String> getUserRoles(Users user) {
+        List<String> roles = new ArrayList<>();
+
+        for (Role r : user.getRoles()) {
+            roles.add(r.getName());
+        }
+
+        return roles;
     }
 
 

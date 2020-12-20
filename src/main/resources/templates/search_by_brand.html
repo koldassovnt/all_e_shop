@@ -81,8 +81,22 @@
                                     <a href="#" th:text="${it.brand.country.name}"></a>
                                 </p>
                             </div>
-                            <div class="card-footer">
-                                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                            <div class="card-footer" th:switch="${it.stars}">
+                                <p th:case="'1'">
+                                    <small class="text-muted">&#9733; &#9734; &#9734; &#9734; &#9734;</small>
+                                </p>
+                                <p th:case="'2'">
+                                    <small class="text-muted">&#9733; &#9733; &#9734; &#9734; &#9734;</small>
+                                </p>
+                                <p th:case="'3'">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9734; &#9734;</small>
+                                </p>
+                                <p th:case="'4'">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                                </p>
+                                <p th:case="'5'">
+                                    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>
+                                </p>
                             </div>
                         </div>
                     </div>
