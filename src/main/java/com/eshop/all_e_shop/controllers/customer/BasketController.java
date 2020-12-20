@@ -4,6 +4,7 @@ import com.eshop.all_e_shop.enteties.*;
 import com.eshop.all_e_shop.services.ShopItemService;
 import com.eshop.all_e_shop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -131,6 +132,7 @@ public class BasketController {
     }
 
     @PostMapping(value = "/check_in")
+    @PreAuthorize("isAuthenticated()")
     public String check_in(HttpSession session) {
 
         List<Basket> items = (List<Basket>) session.getAttribute("basket");

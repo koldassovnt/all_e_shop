@@ -92,6 +92,83 @@
                     </form>
                 </div>
 
+
+
+                <div class="mt-4">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <form th:action="@{'/leave_comment'}" method="post">
+                                <input type="hidden" name="item_id" th:value="${item.id}">
+                                <textarea class="form-control" name="comment" rows="2" placeholder="Leave your comment"></textarea>
+                                <div class="mar-top clearfix" style="display: flex; justify-content: flex-end;">
+                                    <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Comment</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <div class="panel-body" th:each="it : ${comments}">
+                            <!-- Newsfeed Content -->
+                            <!--===================================================-->
+                            <div class="media-block">
+                                <div class="media-body">
+                                    <div class="mar-btm">
+                                        <a href="#" class="btn-link text-semibold media-heading box-inline" th:text="${it.author.fullName}"></a>
+                                        <p class="text-muted text-sm" th:text="${it.addedDate}"></p>
+                                    </div>
+                                    <p th:text="${it.comment}"></p>
+                                    <div class="pad-ver">
+                                        <div class="btn-group">
+                                            <button th:if="${currentUser != null && (currentUser.id == it.author.id)}"
+                                                    class="btn btn-sm btn-default" data-toggle="modal" data-target="#editModal"><img width="20" src="https://www.flaticon.com/svg/static/icons/svg/1827/1827933.svg"
+                                                                                                              alt="edit"></button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Edit Comment</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form th:action="@{'/edit_comment'}" method="post">
+                                                            <input type="hidden" name="item_id" th:value="${item.id}">
+                                                            <input type="hidden" name="comment_id" th:value="${it.id}">
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label>Comment</label>
+                                                                    <textarea class="form-control" name="comment" rows="2" th:value="${it.comment}" th:placeholder="${it.comment}"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button class="btn btn-primary">EDIT</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <form th:action="@{'/delete_comment'}" method="post">
+                                                <input type="hidden" name="comment_id" th:value="${it.id}">
+                                                <input type="hidden" name="item_id" th:value="${item.id}">
+                                                <button th:if="${currentUser != null && (currentUser.id == it.author.id || )}"
+                                                        class="btn btn-sm btn-default"><img width="20" src="https://www.flaticon.com/svg/static/icons/svg/1632/1632602.svg"
+                                                                                                             alt="delete"></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
             <!-- /.col-lg-9 -->
 

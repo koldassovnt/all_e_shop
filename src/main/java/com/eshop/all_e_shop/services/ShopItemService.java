@@ -57,4 +57,5 @@ public interface ShopItemService {
     Comment saveComment(Comment comment);
     Comment getComment(Long id);
     void deleteComment(Comment comment);
+    List<Comment> getCommentsByItemId(Long id);
 }

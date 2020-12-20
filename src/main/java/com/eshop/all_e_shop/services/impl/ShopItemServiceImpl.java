@@ -252,5 +252,10 @@ public class ShopItemServiceImpl implements ShopItemService {
         commentRepository.delete(comment);
     }
 
+    @Override
+    public List<Comment> getCommentsByItemId(Long id) {
+        return commentRepository.getAllByShopItemId(id);
+    }
+
 
 }

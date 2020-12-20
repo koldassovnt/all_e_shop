@@ -66,6 +66,9 @@ public class MainController {
             }
         }
 
+        List<Comment> comments = shopItemService.getCommentsByItemId(id);
+
+        model.addAttribute("comments", comments);
         model.addAttribute("item_pictures", item_pictures);
         model.addAttribute("brands", brands);
         model.addAttribute("item", shopItem);
