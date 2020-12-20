@@ -15,7 +15,8 @@
                 <a class="nav-link" th:href="@{'/admin_items'}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')">ADMIN PANEL</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{'/basket'}" th:text="#{label.basket}"></a>
+                <a class="nav-link" th:href="@{'/basket'}" th:if="${session.amount != null && session.amount > 0}" th:text="#{label.basket} + '(' + ${session.amount} + ')' "></a>
+                <a class="nav-link" th:href="@{'/basket'}" th:if="${session.amount == null || session.amount == 0}" th:text="#{label.basket}"></a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
