@@ -17,15 +17,13 @@ layout:decorator = "layout/main.html">
                         </div>
                     </div>
 
-
-
-                        <h1 class="my-4"></h1>
-                        <div class="list-group">
-                            <a href="#" style="background-color: #156145;" class="list-group-item active" th:text="#{list-group.title_brand}"></a>
-                            <div th:each = "it : ${brands}">
-                            <a th:href="@{'/search_by_brand_out/' + ${it.id}}" class="list-group-item" th:text="${it.name}"></a>
-                            </div>
+                    <h1 class="my-4"></h1>
+                    <div class="list-group">
+                        <a href="#" style="background-color: #156145;" class="list-group-item active" th:text="#{list-group.title_brand}"></a>
+                        <div th:each = "it : ${brands}">
+                        <a th:href="@{'/search_by_brand_out/' + ${it.id}}" class="list-group-item" th:text="${it.name}"></a>
                         </div>
+                    </div>
 
                 </div>
                 <!-- /.col-lg-3 -->
@@ -47,9 +45,9 @@ layout:decorator = "layout/main.html">
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                         </ol>
-                        <div class="carousel-inner" role="listbox">
+                        <div class="carousel-inner" role="listbox" style="height: 400px;">
                             <div class="carousel-item active">
-                                <img class="d-block img-fluid" src="https://cdn0.it4profit.com/news/29/1416/1.jpg" alt="First slide">
+                                <img class="d-block img-fluid" src="https://www.apple.com/v/macbook-pro-13/f/images/overview/hero_endframe__bsza6x4fldiq_large_2x.jpg" alt="First slide">
                             </div>
                             <div class="carousel-item">
                                 <img class="d-block img-fluid" src="https://www.ixbt.com/img/n1/news/2020/7/1/173400_O_large_large.jpg" alt="Second slide">
@@ -71,18 +69,23 @@ layout:decorator = "layout/main.html">
                     <div class="row" >
                         <div class="col-lg-4 col-md-6 mb-4" th:each = "it : ${items}">
                             <div class="card h-100">
-                                <a th:href="@{'/detail/' + ${it.id}}"><img style="min-height: 139px; max-height: 139px;" class="card-img-top" th:src="${it.smallPicURL}" alt=""></a>
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        <a th:href="@{'/detail/' + ${it.id}}"th:text="${it.name}"></a>
-                                    </h4>
-                                    <h5 th:text="${it.priceToStr()}"></h5>
-                                    <p class="card-text" th:text="${it.description}"></p>
-                                    <br>
-                                    <p> <b th:text="#{label.brand}"></b>
-                                        <a href="#" th:text="${it.brand.name}"></a>,
-                                        <a href="#" th:text="${it.brand.country.name}"></a>
-                                    </p>
+                                <a th:href="@{'/detail/' + ${it.id}}"><img style="min-height: 172px; max-height: 172px;" class="card-img-top" th:src="${it.smallPicURL}" alt=""></a>
+                                <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">
+                                    <div>
+                                        <h4 class="card-title">
+                                            <a th:href="@{'/detail/' + ${it.id}}"th:text="${it.name}"></a>
+                                        </h4>
+
+                                        <h5 th:text="${it.priceToStr()}"></h5>
+                                        <p class="card-text" th:text="${it.description}"></p>
+                                        <br>
+                                    </div>
+                                    <div>
+                                        <p> <b th:text="#{label.brand}"></b>
+                                            <a href="#" th:text="${it.brand.name}"></a>,
+                                            <a href="#" th:text="${it.brand.country.name}"></a>
+                                        </p>
+                                    </div>
                                 </div>
                                 <div class="card-footer" th:switch="${it.stars}">
                                     <p th:case="'1'">
