@@ -19,7 +19,7 @@
             <div class="col-lg-9">
                 <div class="my-4" style="display: flex; justify-content: space-between">
                     <h1 style="margin:0;" th:text="#{list-group.title_cat}"></h1>
-                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#addModal">Add New</button>
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#addModal" th:text="#{btn.addNew}"></button>
                 </div>
 
                 <div class="row mt-5">
@@ -28,9 +28,9 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>NAME</th>
-                                <th>LOGO URL</th>
-                                <th>OPERATIONS</th>
+                                <th th:text="#{label.aname}"></th>
+                                <th th:text="#{label.alogoUrl}"></th>
+                                <th th:text="#{label.operations}"></th>
 
                             </tr>
                             </thead>
@@ -39,7 +39,7 @@
                                 <td th:text = "${it.id}"></td>
                                 <td th:text="${it.name}"></td>
                                 <td th:text="${it.logoURL}"></td>
-                                <td><a th:href="@{'/admin_categories_edit/' + ${it.id}}" class="btn btn-info btn-sm">Details</a></td>
+                                <td><a th:href="@{'/admin_categories_edit/' + ${it.id}}" class="btn btn-info btn-sm" th:text="#{btn.details}"></a></td>
                             </tr>
                             </tbody>
                         </table>
@@ -62,7 +62,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Brand</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" th:text="#{label.adding}"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -81,8 +81,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button class="btn btn-primary">ADD</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{label.close}"></button>
+                        <button class="btn btn-primary" th:text="#{btn.add}"></button>
                     </div>
                 </form>
             </div>

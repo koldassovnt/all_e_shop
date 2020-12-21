@@ -69,28 +69,28 @@
                                     <table class="table table-striped">
                                         <thead>
                                         <tr>
-                                            <th>Item</th>
+                                            <th th:text="#{label.item}"></th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
-                                            <th>Price</th>
+                                            <th th:text="#{label.bprice}"></th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
-                                            <th>Amount</th>
+                                            <th th:text="#{label.amount}"></th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
                                             <th>         </th>
-                                            <th>OPERATIONS</th>
+                                            <th th:text="#{label.operations}"></th>
 
                                         </tr>
                                         </thead>
@@ -171,7 +171,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Role</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" th:text="#{label.make_payment}"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -188,7 +188,7 @@
                                 <label th:text="#{label.card_num}"></label>
                                 <input placeholder="---- ---- ---- ----" type="tel" inputmode="numeric"
                                        pattern="[0-9\s]{13,19}" autocomplete="cc-number"
-                                       maxlength="19"  name="card_num" value="" id="ccnum" class="form-control">
+                                       maxlength="16"  name="card_num" value="" id="ccnum" class="form-control">
                             </div>
                         </div>
 
@@ -206,8 +206,8 @@
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button class="btn btn-primary">PAY</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{label.close}"></button>
+                        <button class="btn btn-primary" th:text="#{label.pay}"></button>
                     </div>
                 </form>
             </div>

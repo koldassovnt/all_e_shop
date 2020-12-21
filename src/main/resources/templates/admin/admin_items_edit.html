@@ -72,13 +72,13 @@
                             </div>
                             <br>
                             <div class="form-group">
-                                <button class="btn btn-success">SAVE</button>
+                                <button class="btn btn-success" th:text="#{btn.save}"></button>
                             </div>
                         </form>
                         <div>
                             <form th:action="@{'/delete_item'}" method="post">
                                 <input name="item_id" type="hidden" th:value="${shopItem.id}">
-                                <button class="btn btn-danger">DELETE</button>
+                                <button class="btn btn-danger" th:text="#{btn.delete}"></button>
                             </form>
                         </div>
 
@@ -117,14 +117,14 @@
 
                 <div class="row-mt-5">
                     <div class="col-6 offset-3">
-                        <h3 style="margin-bottom: 4px;">Pictures:</h3>
+                        <h3 style="margin-bottom: 4px;" th:text="#{label.pictures}"></h3>
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Picture</th>
+                                <th th:text="#{label.picture}"></th>
                                 <th>URL</th>
-                                <th>ADDED DATE</th>
-                                <th>OPERATIONS</th>
+                                <th th:text="#{label.added_date}"></th>
+                                <th th:text="#{label.operations}"></th>
 
                             </tr>
                             </thead>
@@ -170,7 +170,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Picture</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" th:text="#{label.adding}"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -187,8 +187,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">ADD</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{label.close}"></button>
+                        <button type="submit" class="btn btn-primary" th:text="#{btn.add}"></button>
                     </div>
                 </form>
             </div>

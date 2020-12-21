@@ -12,7 +12,7 @@
                 <a class="nav-link" th:href="@{'/'}" th:text="#{label.home}"></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" th:href="@{'/admin_items'}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')">ADMIN PANEL</a>
+                <a class="nav-link" th:href="@{'/admin_items'}" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')" th:text="#{label.admin}"></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" th:href="@{'/basket'}" th:if="${session.amount != null && session.amount > 0}" th:text="#{label.basket} + '(' + ${session.amount} + ')' "></a>

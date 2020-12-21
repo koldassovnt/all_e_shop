@@ -32,18 +32,18 @@
                                 <input type="text" class="form-control" name="name" th:value="${role.name}">
                             </div>
                             <div class="form-group">
-                                <label>Description</label>
+                                <label th:text="#{label.adescription}">></label>
                                 <input type="text" class="form-control" name="description" th:value="${role.description}">
                             </div>
                             <br>
                             <div class="form-group">
-                                <button class="btn btn-success">SAVE</button>
+                                <button class="btn btn-success" th:text="#{btn.save}"></button>
                             </div>
                         </form>
                         <div>
                             <form th:action="@{'/delete_role'}" method="post">
                                 <input name="role_id" type="hidden" th:value="${role.id}">
-                                <button class="btn btn-danger">DELETE</button>
+                                <button class="btn btn-danger" th:text="#{btn.delete}"></button>
                             </form>
                         </div>
 

@@ -153,6 +153,7 @@ public class BasketController {
         }
 
         session.removeAttribute("basket");
+        session.removeAttribute("amount");
 
         return "redirect:/";
     }

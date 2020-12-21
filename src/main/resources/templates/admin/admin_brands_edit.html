@@ -40,13 +40,13 @@
                             </div>
                             <br>
                             <div class="form-group">
-                                <button class="btn btn-success">SAVE</button>
+                                <button class="btn btn-success" th:text="#{btn.save}"></button>
                             </div>
                         </form>
                         <div>
                             <form th:action="@{'/delete_brand'}" method="post">
                                 <input name="brand_id" type="hidden" th:value="${brand.id}">
-                                <button class="btn btn-danger">DELETE</button>
+                                <button class="btn btn-danger" th:text="#{btn.delete}"></button>
                             </form>
                         </div>
 

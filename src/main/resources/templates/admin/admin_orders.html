@@ -18,7 +18,7 @@
 
             <div class="col-lg-9">
                 <div class="my-4" style="display: flex; justify-content: space-between">
-                    <h1 style="margin:0;">Orders</h1>
+                    <h1 style="margin:0;" th:text="#{list-group.title_orders}"></h1>
                 </div>
 
                 <div class="row mt-5">
@@ -27,11 +27,11 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>SHOP ITEM</th>
-                                <th>AMOUNT</th>
-                                <th>TOTAL PRICE</th>
-                                <th>BUY DATE</th>
-                                <th>OPERATIONS</th>
+                                <th th:text="#{label.item}"></th>
+                                <th th:text="#{label.amount}"></th>
+                                <th th:text="#{label.total}"></th>
+                                <th th:text="#{label.buy_date}"></th>
+                                <th th:text="#{label.operations}"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -44,7 +44,7 @@
                                 <td>
                                     <form th:action="@{'/delete_order'}" method="post">
                                         <input type="hidden" name="order_id" th:value="${it.id}">
-                                        <button class="btn btn-danger btn-sm">DELETE</button>
+                                        <button class="btn btn-danger btn-sm" th:text="#{btn.delete}"></button>
                                     </form>
                                 </td>
                             </tr>

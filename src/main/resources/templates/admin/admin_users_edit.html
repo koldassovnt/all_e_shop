@@ -37,7 +37,7 @@
                                 <input name="user_name" th:value="${user.fullName}" type="text" class="form-control" th:placeholder="${user.fullName}" required>
                             </div>
                             <div class="form-group">
-                                <label>Role</label>
+                                <label th:text="#{label.role}"></label>
                                 <select name="role_id" class="form-control">
                                     <option th:selected="${user.roles[0].name}"th:value="${user.roles[0].id}" th:text="${user.roles[0].name}"></option>
                                     <option th:each="r : ${roles}" th:text="${r.name}" th:value="${r.id}"></option>
@@ -45,13 +45,13 @@
                             </div>
                             <br>
                             <div class="form-group">
-                                <button class="btn btn-success">SAVE</button>
+                                <button class="btn btn-success" th:text="#{btn.save}"></button>
                             </div>
                         </form>
                         <div>
                             <form th:action="@{'/delete_user'}" method="post">
                                 <input name="user_id" type="hidden" th:value="${user.id}">
-                                <button class="btn btn-danger">DELETE</button>
+                                <button class="btn btn-danger" th:text="#{btn.delete}"></button>
                             </form>
                         </div>
 

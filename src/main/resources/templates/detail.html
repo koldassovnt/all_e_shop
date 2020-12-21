@@ -102,7 +102,7 @@
                 <div class="mt-4">
                     <form th:action="@{'/add_item_to_basket'}" method="post">
                         <input name="item_id" type="hidden" th:value="${item.id}">
-                        <button class="btn btn-success">Add to Basket</button>
+                        <button class="btn btn-success" th:text="#{label.add_to_basket}"></button>
                     </form>
                 </div>
 
@@ -112,9 +112,9 @@
                         <div class="panel-body">
                             <form th:action="@{'/leave_comment'}" method="post">
                                 <input type="hidden" name="item_id" th:value="${item.id}">
-                                <textarea class="form-control" name="comment" rows="2" placeholder="Leave your comment"></textarea>
+                                <textarea class="form-control" name="comment" rows="2" th:placeholder="#{label.leave_comment}"></textarea>
                                 <div class="mar-top clearfix" style="display: flex; justify-content: flex-end;">
-                                    <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Comment</button>
+                                    <button class="btn btn-sm btn-primary pull-right" type="submit" th:text="#{label.comment}"></button>
                                 </div>
                             </form>
                         </div>
@@ -146,7 +146,7 @@
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Edit Comment</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel" th:text="#{label.edit_comment}"></h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
@@ -156,13 +156,13 @@
                                                                 <input type="hidden" name="comment_id" th:value="${it.id}">
                                                                 <div class="modal-body">
                                                                     <div class="form-group">
-                                                                        <label>Comment</label>
-                                                                        <textarea class="form-control" name="comment" rows="2" th:value="${it.comment}"></textarea>
+                                                                        <label th:text="#{label.comment}"></label>
+                                                                        <textarea class="form-control" name="comment" rows="2" th:value="${it.comment}" th:placeholder="${it.comment}"></textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                    <button class="btn btn-primary">EDIT</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{label.close}"></button>
+                                                                    <button class="btn btn-primary" th:text="#{label.edit}"></button>
                                                                 </div>
                                                             </form>
                                                         </div>

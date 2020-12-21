@@ -69,8 +69,8 @@ public class ItemSearchController {
 
     @GetMapping(value = "/searchItemDetailed")
     public String searchItemDetailed(Model model, @RequestParam(name = "search") String search,
-                                     @RequestParam(name = "priceFrom") double priceFrom,
-                                     @RequestParam(name = "priceTo") double priceTo) {
+                                     @RequestParam(name = "priceFrom", defaultValue = "0") double priceFrom,
+                                     @RequestParam(name = "priceTo", defaultValue = "1000000") double priceTo) {
 
         List<ShopItem> shopItems = shopItemService.getItemsByNameAndPriceBetween(search, priceFrom, priceTo);
         List<Brand> brands = shopItemService.getAllBrands();
@@ -104,8 +104,8 @@ public class ItemSearchController {
     public String searchByBrandIn(Model model,
                                   @RequestParam(name = "search") String search,
                                   @RequestParam(name = "brand_id") Long id,
-                                  @RequestParam(name = "priceFrom") double priceFrom,
-                                  @RequestParam(name = "priceTo") double priceTo) {
+                                  @RequestParam(name = "priceFrom", defaultValue = "0") double priceFrom,
+                                  @RequestParam(name = "priceTo", defaultValue = "1000000") double priceTo) {
 
         List<ShopItem> shopItems = shopItemService.getItemsByBrandIdAndNameAndPriceBetween(id, search, priceFrom, priceTo);
         List<Brand> brands = shopItemService.getAllBrands();

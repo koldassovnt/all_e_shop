@@ -13,7 +13,7 @@
                 <div class="list-group">
                     <a href="#" style="background-color: #156145;" class="list-group-item active" th:text="#{list-group.title_cat}"></a>
                     <div th:each = "it : ${categories}">
-                        <a href="#" class="list-group-item" th:text="${it.name}"></a>
+                        <a th:href="@{'/search_by_categories/' + ${it.id}}" class="list-group-item" th:text="${it.name}"></a>
                     </div>
                 </div>
 
