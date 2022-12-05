@@ -1,0 +1,19 @@
+version: "2.3"
+services:
+
+  postgres-e-shop:
+    image: postgres:12
+    mem_limit: 200M
+    container_name: e_shop
+    restart: always
+    ports:
+      - "47211:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres-e-shop:/var/lib/postgresql/data
+      - ./pg-init/init.sql:/docker-entrypoint-initdb.d/create.sql
+
+volumes:
+  postgres-e-shop:
+    driver: local
