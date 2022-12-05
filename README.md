@@ -8,6 +8,6 @@ Goods store.
 
 Payment has not realized yet.
 
-###For client side used JSP.
+### For client side used JSP.
 
 
